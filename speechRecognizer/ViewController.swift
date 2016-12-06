@@ -15,6 +15,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var textView: UITextView!
     var audioRecordingSession : AVAudioSession!
     var audioRecorder : AVAudioRecorder!
+    var recordingButtonStart : UIButton!
+    var recordingButtonStop : UIButton!
     
     let audioFileName: String = "audio-recordered.m4a"
     
@@ -22,7 +24,46 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        textView.isUserInteractionEnabled = false
+        
+        recordingButtonStart = UIButton()
+        recordingButtonStart.addTarget(self, action: #selector(startRecording), for:.touchUpInside)
+        recordingButtonStart.isUserInteractionEnabled = false
+        recordingButtonStart.alpha = 0.3
+        recordingButtonStart.setTitle("RECORD", for: .normal)
+        recordingButtonStart.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        recordingButtonStart.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        view.addSubview(recordingButtonStart)
+        
+        recordingButtonStop = UIButton()
+        recordingButtonStop.addTarget(self, action: #selector(stopRecording), for:.touchUpInside)
+        recordingButtonStop.isUserInteractionEnabled = false
+        recordingButtonStop.alpha = 0.3
+        recordingButtonStop.setTitle("STOP", for: .normal)
+        recordingButtonStop.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+        recordingButtonStop.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        view.addSubview(recordingButtonStop)
+
         recordingAudioSetUp()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        var frame = recordingButtonStart.frame
+        frame.size.height = 50;
+        frame.size.width = self.view.frame.size.width * 0.6
+        frame.origin.x = (self.view.frame.size.width - frame.size.width)/2
+        frame.origin.y = (self.view.frame.size.height - frame.size.height)/2
+        recordingButtonStart.frame = frame
+        
+        frame = recordingButtonStop.frame
+        frame.size.height = 50
+        frame.size.width = self.view.frame.size.width * 0.6
+        frame.origin.x = (self.view.frame.size.width - frame.size.width)/2
+        frame.origin.y = recordingButtonStart.frame.maxY + 30
+        recordingButtonStop.frame = frame
+        
     }
     
     //ask for permission
@@ -38,10 +79,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
                 
                 if allowed {
                     //record
-                    self.startRecording()
-                    
+                    self.recordingButtonStart.isUserInteractionEnabled = true
+                    self.recordingButtonStart.alpha = 1.0
+                
                 } else {
                     print("micro no accesible")
+                    self.recordingButtonStart.isUserInteractionEnabled = false
+                    self.recordingButtonStart.alpha = 0.3
                 }
             })
         } catch {
@@ -63,7 +107,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
             audioRecorder.delegate = self
             audioRecorder.record()
             
-            Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.stopRecording), userInfo: nil, repeats: false)
+           // Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.stopRecording), userInfo: nil, repeats: false)
+            self.recordingButtonStop.isUserInteractionEnabled = true
+            self.recordingButtonStop.alpha = 1.0
             
         } catch {
             print("recording has an error")
@@ -82,8 +128,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         
         audioRecorder.stop()
         audioRecorder = nil
+        recognizeSpeech()
         
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.recognizeSpeech), userInfo: nil, repeats: false)
+       // Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.recognizeSpeech), userInfo: nil, repeats: false)
     }
     
     

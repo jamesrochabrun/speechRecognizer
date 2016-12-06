@@ -318,6 +318,7 @@
 				7BE284DB1DF1F3EC0089EDA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

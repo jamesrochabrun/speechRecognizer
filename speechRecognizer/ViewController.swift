@@ -108,6 +108,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
             audioRecorder.record()
             
            // Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.stopRecording), userInfo: nil, repeats: false)
+            self.recordingButtonStart.isUserInteractionEnabled = false
+            self.recordingButtonStart.alpha = 0.3
             self.recordingButtonStop.isUserInteractionEnabled = true
             self.recordingButtonStop.alpha = 1.0
             
@@ -129,6 +131,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.stop()
         audioRecorder = nil
         recognizeSpeech()
+        recordingButtonStop.isUserInteractionEnabled = false
+        recordingButtonStop.alpha = 0.3
+        self.recordingButtonStart.isUserInteractionEnabled = true
+        self.recordingButtonStart.alpha = 1.0
         
        // Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.recognizeSpeech), userInfo: nil, repeats: false)
     }

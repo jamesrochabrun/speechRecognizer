@@ -21,8 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Hola que tal?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7WX-R1-rq0">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Say something..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7WX-R1-rq0">
+                                <rect key="frame" x="0.0" y="20" width="375" height="355"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -30,9 +30,9 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="7WX-R1-rq0" secondAttribute="bottom" id="2g9-1W-Xy8"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="7WX-R1-rq0" secondAttribute="bottom" constant="292" id="2g9-1W-Xy8"/>
                             <constraint firstItem="7WX-R1-rq0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Bpj-K4-tz6"/>
-                            <constraint firstItem="7WX-R1-rq0" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="IXR-bF-fru"/>
+                            <constraint firstItem="7WX-R1-rq0" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="IXR-bF-fru"/>
                             <constraint firstAttribute="trailing" secondItem="7WX-R1-rq0" secondAttribute="trailing" id="fsa-Ed-YF0"/>
                         </constraints>
                     </view>
